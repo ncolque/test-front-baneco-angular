@@ -1,0 +1,44 @@
+<span>{{ titulo }}</span>
+<br />
+<form [formGroup]="formTarea" (ngSubmit)="createEditTarea()">
+  <div>
+    <mat-form-field>
+      <mat-label>Titulo</mat-label>
+      <input matInput type="text" formControlName="titulo" />
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Descripcion</mat-label>
+      <input matInput type="text" formControlName="descripcion" />
+    </mat-form-field>
+  </div>
+  <div>
+    <!-- <mat-form-field>
+      <mat-label>Estado</mat-label>
+      <input matInput type="text" formControlName="estado" />
+    </mat-form-field> -->
+
+    <mat-form-field>
+      <mat-label>Estados</mat-label>
+      <mat-select formControlName="estado">
+        @for (estado of estados; track estado) {
+        <mat-option [value]="estado.value">{{ estado.viewValue }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
+    <button mat-raised-button type="submit" [disabled]="formTarea.invalid">
+      Guardar
+    </button>
+    <button
+      mat-raised-button
+      type="button"
+      [routerLink]="['/listar-tareas']"
+      routerLinkActive="router-link-active"
+    >
+      Cancelar
+    </button>
+  </div>
+</form>

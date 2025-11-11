@@ -1,0 +1,24 @@
+.example-container {
+  /* width: auto;
+  height: 200px;
+  margin: 10px; */
+  /* border: 1px solid #555; */
+  /* The background property is added to clearly distinguish the borders between drawer and main
+     content */
+  background: #eee;
+}
+
+mat-sidenav-container {
+  height: calc(100svh - 65px);
+}
+
+mat-sidenav {
+  width: 200px;
+  margin-top: 8px;
+}
+
+.content {
+  height: calc(100svh - 98px);
+  max-width: 1520px;
+  padding: 8px;
+}

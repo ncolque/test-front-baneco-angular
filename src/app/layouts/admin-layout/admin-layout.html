@@ -1,0 +1,55 @@
+<app-header></app-header>
+
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav class="example-sidenav" mode="side" opened>
+    <mat-nav-list>
+      <mat-list-item routerLink="">
+        <mat-icon matListItemIcon>home</mat-icon> Home</mat-list-item
+      >
+    </mat-nav-list>
+    <mat-nav-list>
+      <mat-list-item routerLink="">
+        <mat-icon matListItemIcon>list</mat-icon> Tareas</mat-list-item
+      >
+    </mat-nav-list>
+    <mat-nav-list>
+      <mat-list-item routerLink="listar-productos">
+        <mat-icon matListItemIcon>newspaper</mat-icon> Modulo 1</mat-list-item
+      >
+    </mat-nav-list>
+    <mat-nav-list>
+      <mat-list-item routerLink="">
+        <mat-icon matListItemIcon>shopping_cart</mat-icon>
+        Modulo 2</mat-list-item
+      >
+    </mat-nav-list>
+    <mat-nav-list>
+      <mat-list-item routerLink="">
+        <mat-icon matListItemIcon>settings</mat-icon> Ajustes</mat-list-item
+      >
+    </mat-nav-list>
+    <mat-nav-list>
+      <mat-list-item routerLink="">
+        <mat-icon matListItemIcon>person</mat-icon> Profile</mat-list-item
+      >
+    </mat-nav-list>
+    <mat-nav-list>
+      <mat-list-item routerLink="">
+        <mat-icon matListItemIcon>info</mat-icon> About</mat-list-item
+      >
+    </mat-nav-list>
+
+    <!-- <mat-nav-list>
+      @for (link of list; track link) {
+        <a mat-list-item href="..." [activated]="link.isActive">{{ link }}</a>
+      }
+    </mat-nav-list> -->
+  </mat-sidenav>
+
+  <mat-sidenav-content class="example-sidenav-content content">
+    <router-outlet />
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- <app-footer></app-footer> -->
+
