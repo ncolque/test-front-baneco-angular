@@ -22,3 +22,28 @@ mat-sidenav {
   max-width: 1520px;
   padding: 8px;
 }
+
+.mi-sidebar {
+  background-color: #e7142a;
+  color: ffffff;
+  //#eef1f5
+  mat-icon {
+    color: white;
+  }
+}
+
+.texto-blanco {
+  color: white;
+}
+
+.mi-sidebar mat-list-item {
+  color: white;
+
+  mat-icon {
+    color: white;
+  }
+}
+
+span {
+  color: white;
+}

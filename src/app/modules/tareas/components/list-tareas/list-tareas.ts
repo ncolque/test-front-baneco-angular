@@ -6,6 +6,9 @@ import { MatTableModule } from '@angular/material/table';
 import { Router, RouterLink } from '@angular/router';
 import { ITarea } from '../../interfaces/itarea';
 import { TareaService } from '../../services/tarea-service';
+import { ConfirmDialog } from '../../../../shared/components/confirm-dialog/confirm-dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 const MATERIAL_MODULES = [
   MatTableModule,
@@ -31,7 +34,11 @@ export class ListTareas {
   ];
   private readonly _tareasSvc = inject(TareaService);
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.getAllTareas();
@@ -46,8 +53,18 @@ export class ListTareas {
   deleteTarea(id: number) {
     const confirmado = confirm('¿Estás seguro de eliminar esta tarea?');
     if (confirmado) {
-      this._tareasSvc.deleteTareaSvc(id).subscribe((resp) => {        
-        this.getAllTareas();
+      this._tareasSvc.deleteTareaSvc(id).subscribe({
+        next: (resp: any) => {
+          this.snackBar.open(resp.mensaje, 'Cerrar', { duration: 3000 });
+          this.getAllTareas();
+        },
+        error: (err) => {
+          this.snackBar.open(
+            err.error?.mensaje || 'Error al eliminar la tarea',
+            'Cerrar',
+            { duration: 3000 }
+          );
+        },
       });
     }
   }

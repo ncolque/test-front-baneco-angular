@@ -1,41 +1,35 @@
 <app-header></app-header>
 
 <mat-sidenav-container class="example-container">
-  <mat-sidenav #sidenav class="example-sidenav" mode="side" opened>
+  <mat-sidenav #sidenav class="example-sidenav mi-sidebar" mode="side" opened>
     <mat-nav-list>
       <mat-list-item routerLink="">
-        <mat-icon matListItemIcon>home</mat-icon> Home</mat-list-item
-      >
-    </mat-nav-list>
-    <mat-nav-list>
-      <mat-list-item routerLink="">
-        <mat-icon matListItemIcon>list</mat-icon> Tareas</mat-list-item
+        <mat-icon matListItemIcon>home</mat-icon> <span>Home</span> </mat-list-item
       >
     </mat-nav-list>
     <mat-nav-list>
       <mat-list-item routerLink="listar-productos">
-        <mat-icon matListItemIcon>newspaper</mat-icon> Modulo 1</mat-list-item
+        <mat-icon matListItemIcon>list</mat-icon> <span>Tareas</span> </mat-list-item
       >
     </mat-nav-list>
     <mat-nav-list>
       <mat-list-item routerLink="">
-        <mat-icon matListItemIcon>shopping_cart</mat-icon>
-        Modulo 2</mat-list-item
+        <mat-icon matListItemIcon>newspaper</mat-icon> <span>Modulo 1</span> </mat-list-item
+      >
+    </mat-nav-list>    
+    <mat-nav-list>
+      <mat-list-item routerLink="">
+        <mat-icon matListItemIcon>settings</mat-icon> <span>Ajustes</span> </mat-list-item
       >
     </mat-nav-list>
     <mat-nav-list>
       <mat-list-item routerLink="">
-        <mat-icon matListItemIcon>settings</mat-icon> Ajustes</mat-list-item
+        <mat-icon matListItemIcon>person</mat-icon> <span>Profile</span> </mat-list-item
       >
     </mat-nav-list>
     <mat-nav-list>
       <mat-list-item routerLink="">
-        <mat-icon matListItemIcon>person</mat-icon> Profile</mat-list-item
-      >
-    </mat-nav-list>
-    <mat-nav-list>
-      <mat-list-item routerLink="">
-        <mat-icon matListItemIcon>info</mat-icon> About</mat-list-item
+        <mat-icon matListItemIcon>info</mat-icon> <span>About</span> </mat-list-item
       >
     </mat-nav-list>
 

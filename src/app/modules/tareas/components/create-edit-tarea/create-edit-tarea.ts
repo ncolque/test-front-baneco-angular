@@ -12,8 +12,12 @@ import { Router, RouterLink } from '@angular/router';
 import { ITarea } from '../../interfaces/itarea';
 import { TareaService } from '../../services/tarea-service';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { ConfirmDialog } from '../../../../shared/components/confirm-dialog/confirm-dialog';
 
-const MATERIAL_MODULES = [MatFormFieldModule, MatSelectModule, MatInputModule, MatButtonModule];
+const MATERIAL_MODULES = [MatFormFieldModule, MatSelectModule, MatInputModule, MatButtonModule,  MatDialogModule,
+  MatSnackBarModule];
 
 interface Estados {
   value: string;
@@ -39,10 +43,10 @@ export class CreateEditTarea {
     {value: 'completada', viewValue: 'Completada'},
   ];
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar) {
     this.formTarea = this.formBuilder.group({
-      titulo: ['', [Validators.required]],
-      descripcion: ['', [Validators.required]],
+      titulo: ['', [Validators.required, Validators.maxLength(50)]],
+      descripcion: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9\s]+$/)]],
       estado: ['', [Validators.required]],
     });
   }
@@ -74,14 +78,14 @@ export class CreateEditTarea {
   }
 
   createTarea() {
-    const tarea: ITarea = {
-      titulo: this.formTarea.get('titulo')?.value,
-      descripcion: this.formTarea.get('descripcion')?.value,
-      estado: this.formTarea.get('estado')?.value,
-    };
+    const tarea: ITarea = this.formTarea.value;
 
-    this._tareaSvc.createTareaSvc(tarea).subscribe((resp) => {
-      this.router.navigate(['listar-tareas']);
+    this._tareaSvc.createTareaSvc(tarea).subscribe({
+      next: () => {
+        this.snackBar.open('Tarea creada exitosamente.', 'Cerrar', { duration: 3000 });
+        this.router.navigate(['listar-tareas']);
+      },
+      error: () => this.snackBar.open('Error al crear tarea.', 'Cerrar', { duration: 3000 }),
     });
   }
 
@@ -92,8 +96,13 @@ export class CreateEditTarea {
       estado: this.formTarea.get('estado')?.value,
     };
     tarea.id = this.tareaId;
-    this._tareaSvc.updateTareaSvc(this.tareaId, tarea).subscribe(resp => {
-      this.router.navigate(['/listar-tareas']);
-    });    
+
+    this._tareaSvc.updateTareaSvc(this.tareaId, tarea).subscribe({
+      next: () => {
+        this.snackBar.open('Tarea actualizada.', 'Cerrar', { duration: 3000 });
+        this.router.navigate(['/listar-tareas']);
+      },
+      error: () => this.snackBar.open('Error al actualizar tarea.', 'Cerrar', { duration: 3000 }),
+    });   
   }
 }

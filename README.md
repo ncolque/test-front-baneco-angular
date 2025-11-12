@@ -1,59 +1,167 @@
-# TestFrontBanecoAngular
+# Frontend Angular - Sistema de Gestión de Tareas
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.3.
+Este proyecto es un frontend desarrollado con Angular 20 y Angular Material, diseñado para consumir la API REST de tareas.
+Permite gestionar tareas mediante un panel administrativo, con funcionalidades de crear, listar, editar y eliminar tareas.
 
-## Development server
+## Características principales
 
-To start a local development server, run:
+✅ **Componentización:** Uso de módulos y componentes reutilizables.
+
+✅ **Angular Material:** Interfaz moderna con Material 3, incluyendo toolbar, sidenav, botones e inputs.
+
+✅ **Reactive Forms:** Validaciones de formularios con FormBuilder y Validators.
+
+✅ **Servicios HTTP:** Comunicación con backend mediante HttpClient y manejo de errores con subscribe y confirm dialogs.
+
+✅ **Arquitectura modular:** Separación de modules, shared, core y layouts.
+
+✅ **Confirm Dialog:** Uso de componentes compartidos para confirmaciones de acciones críticas (eliminar tareas).
+
+## Funcionalidades del sistema
+
+✅ **Crear tarea:** Formulario con título, descripción y estado (Pendiente, En Progreso, Completada).
+
+✅ **Editar tarea:** Formulario prellenado con los datos existentes de la tarea.
+
+✅ **Listar tareas:** Tabla con todas las tareas registradas, mostrando ID, título, descripción, estado y acciones.
+
+✅ **Eliminar tarea:** Confirmación antes de eliminar y actualización de la tabla.
+
+✅ **Validaciones de formulario:** Campos obligatorios, selección de estados válidos.
+
+## Servicios principales
+
+- TareaService: Maneja todas las operaciones CRUD de tareas y comunicación con el backend.
+- ConfirmDialogComponent: Componente compartido para mostrar cuadros de confirmación al eliminar tareas.
+- HeaderComponent: Barra superior con menú y botones de navegación.
+- NavComponent: Navegación lateral con íconos y rutas a los módulos.
+
+## Endpoints consumidos por el frontend
+
+Todos los servicios consumen la API REST de Tareas:
+
+Método		Endpoint		Descripción
+- GET		/api/tarea		Listar todas las tareas
+- GET		/api/tarea/{id}	Obtener tarea por ID
+- POST		/api/tarea		Crear nueva tarea
+- PUT		/api/tarea/{id}	Actualizar tarea existente
+- DELETE	/api/tarea/{id}	Eliminar tarea
+
+## Formularios y validaciones
+
+1. Create/Edit Tarea
+
+- Campos obligatorios: Titulo, Descripcion, Estado.
+- Estado permitido: "pendiente", "en-progreso", "completada".
+- Botones: Guardar (deshabilitado si el formulario es inválido) y Cancelar.
+
+2. Confirmación de eliminación
+
+- Ventana modal que solicita confirmar antes de eliminar una tarea.
+
+## Estilos y temas
+
+- Angular Material con tema Material 3.
+- Toolbar, sidenav y botones personalizados mediante SCSS.
+- Iconos (mat-icon) y textos configurables por CSS según el componente.
+
+## Stack Tecnológico
+
+- Framework: Angular 20
+- Framework Estilos : Angular Material 3
+- Validaciones: Propias
+
+## Instalación
+
+Instrucciones para Ejecutar el Proyecto Localmente
+Prerequisitos
+
+Antes de ejecutar el proyecto, asegúrate de tener instalados los siguientes programas en tu máquina:
+
+- Node.js: Necesario para instalar y ejecutar las dependencias de Angular. Puedes descargarlo desde aquí.
+- Angular CLI: El CLI de Angular es necesario para compilar y ejecutar el proyecto. Si aún no lo tienes, puedes instalarlo ejecutando:
 
 ```bash
-ng serve
+npm install -g @angular/cli
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Clonar el repositorio:
 
 ```bash
-ng generate component component-name
+git clone https://github.com/ncolque/test-front-baneco-angular.git
+cd test-front-baneco-angular
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Instalar Dependencias
 
 ```bash
-ng generate --help
+npm install
 ```
 
-## Building
-
-To build the project run:
+Ejecutar el Proyecto Localmente
 
 ```bash
-ng build
+ng serve -o
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+**IMPORTANTE** Conectar con la API (Backend)
+En la carpeta environment, en el archivo environment.development.ts
+```
+export const environment = {
+  production: false,
+  urlApi: 'https://localhost:44347/api', // <-- Cambia esto si tu API tiene una URL diferente
+};
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## Estructura del Proyecto
 
-```bash
-ng e2e
 ```
+src/
+├── app/
+│   ├── core/                     # Servicios globales, interceptores, utilidades
+│   ├── data/                     # Datos ficticios, modelos o configuraciones
+│   ├── layouts/
+│   │   └── admin-layout/         # Layout principal del panel administrativo
+│   │       ├── admin-layout.html
+│   │       ├── admin-layout.scss
+│   │       └── admin-layout.ts
+│   ├── modules/
+│   │   └── tareas/               # Módulo de tareas
+│   │       ├── components/
+│   │       │   ├── create-edit-tarea/
+│   │       │   │   ├── create-edit-tarea.html
+│   │       │   │   ├── create-edit-tarea.scss
+│   │       │   │   └── create-edit-tarea.ts
+│   │       │   └── list-tareas/
+│   │       │       ├── list-tareas.html
+│   │       │       ├── list-tareas.scss
+│   │       │       └── list-tareas.ts
+│   │       ├── interfaces/       # Interfaces TypeScript para modelos de datos
+│   │       └── services/         # Servicios HTTP para consumir la API
+│   ├── shared/
+│   │   └── components/
+│   │       ├── confirm-dialog/   # Componente de confirmación de acciones
+│   │       ├── header/           # Componente de header
+│   │       └── nav/              # Componente de navegación
+│   ├── app.config.ts             # Configuración global de la app
+│   ├── app.html                  # Plantilla raíz
+│   ├── app.routes.ts             # Configuración de rutas
+│   └── app.scss                  # Estilos globales
+│   └── app.ts                    # Componente principal
+```                  
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## Autor
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Desarrollador: Nicolás Colque
+- Versión: 1.0.0
+- Framework: Angular 20
+
+## Licencia
+Este proyecto se distribuye bajo la licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más información.
+
+---
+© 2025 Nicolás Colque — Todos los derechos reservados.

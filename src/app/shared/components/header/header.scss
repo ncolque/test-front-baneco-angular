@@ -1,3 +1,15 @@
 .example-spacer {
     flex: 1 1 auto;
+}
+
+.mi-toolbar {
+  background-color: #e7142a;
+  color: ffffff;
+  mat-icon {
+    color: white;
   }
+}
+
+.span-blanco {
+  color: ffffff;
+}
